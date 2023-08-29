@@ -1,76 +1,134 @@
 import 'package:flutter/material.dart';
+import 'package:food_delivery/components/ad_card.dart';
 import 'package:food_delivery/components/app_bar.dart';
+import 'package:food_delivery/components/category_card.dart';
+import 'package:food_delivery/components/product_card.dart';
+import 'package:food_delivery/components/search_text_field.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  TextEditingController searchController = TextEditingController();
+
+  int selectedIndex = 1;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
+      bottomNavigationBar: BottomNavigationBar(
+          onTap: (index) {
+            setState(() {
+              selectedIndex = index;
+            });
+          },
+          currentIndex: selectedIndex,
+          selectedLabelStyle: const TextStyle(color: Colors.black),
+          unselectedLabelStyle: const TextStyle(color: Colors.black54),
+          selectedIconTheme: const IconThemeData(color: Colors.black),
+          unselectedIconTheme: const IconThemeData(color: Colors.black54),
+          selectedItemColor: Colors.black,
+          unselectedItemColor: Colors.black54,
+          items: const [
+            BottomNavigationBarItem(
+              icon: Icon(
+                Icons.home,
+              ),
+              label: 'Home',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.search),
+              label: 'Search',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.document_scanner),
+              label: 'Order',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.settings),
+              label: 'Setting',
+            ),
+          ]),
       body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const MyAppBar(),
-          Container(
-            margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-            width: MediaQuery.of(context).size.width,
-            height: 170,
-            decoration: BoxDecoration(
-              color: const Color(0xff050505),
-              borderRadius: BorderRadius.circular(16),
-            ),
-            child: Row(children: [
-              Expanded(
-                flex: 7,
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 20),
-                  child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        const Text(
-                          'Yey, It\'s \n Veggies Day',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 22,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        // write a text about get veggies day
-                        const Text(
-                          'Get Free Delivery & Discount up to 30% for all veggies food',
-                          style: TextStyle(
-                            color: Colors.white38,
-                            fontSize: 14,
-                            fontWeight: FontWeight.w300,
-                          ),
-                        ),
-                        TextButton(
-                          onPressed: () {},
-                          style: ButtonStyle(
-                            backgroundColor:
-                                MaterialStateProperty.all(Colors.red),
-                            shape: MaterialStateProperty.all(
-                              RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(14),
-                              ),
-                            ),
-                          ),
-                          child: const Text(
-                            'Order Now',
-                            style: TextStyle(color: Colors.white),
-                          ),
-                        ),
-                      ]),
+          const AdCard(),
+          SearchTextField(searchController: searchController),
+          SizedBox(
+            width: double.infinity,
+            height: MediaQuery.of(context).size.height * 0.12,
+            child: ListView(
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+              scrollDirection: Axis.horizontal,
+              children: const [
+                CategoryCard(
+                  text: 'Veggies',
+                  image:
+                      'https://icones.pro/wp-content/uploads/2021/04/icone-de-nourriture-noire-symbole-png.png',
                 ),
+                CategoryCard(
+                  text: 'Fruits',
+                  image:
+                      'https://icones.pro/wp-content/uploads/2021/04/icone-de-nourriture-noire-symbole-png.png',
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(
+            height: 20,
+          ),
+          const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16),
+            child: Text(
+              'Popular foods around you',
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
               ),
-              Image.network(
-                'https://static.vecteezy.com/system/resources/previews/013/527/704/original/vegetable-salad-on-a-transparent-background-free-png.png',
-                width: MediaQuery.of(context).size.width * 0.3,
-                height: 300,
-                fit: BoxFit.cover,
-              ),
-            ]),
+            ),
+          ),
+          const SizedBox(
+            height: 10,
+          ),
+          Expanded(
+            child: ListView(
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+              scrollDirection: Axis.horizontal,
+              children: const [
+                ProductCard(
+                  name: 'Burger Cheese',
+                  image:
+                      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSvrokSBC21cI9dBTbubiesGewNJ7EOLXTNpg&usqp=CAU',
+                  price: '14000 IQD',
+                  storeName: 'Burger King',
+                  storeImage:
+                      'https://static.vecteezy.com/system/resources/previews/003/275/730/original/shopping-bag-store-logo-online-shopping-logo-design-free-vector.jpg',
+                ),
+                ProductCard(
+                  name: 'Double Burger Cheese dfjjsfjsjd',
+                  image:
+                      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSvrokSBC21cI9dBTbubiesGewNJ7EOLXTNpg&usqp=CAU',
+                  price: '13000 IQD',
+                  storeName: 'Burger King 2',
+                  storeImage:
+                      'https://static.vecteezy.com/system/resources/previews/003/275/730/original/shopping-bag-store-logo-online-shopping-logo-design-free-vector.jpg',
+                ),
+                ProductCard(
+                  name: 'Fruites',
+                  image:
+                      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSvrokSBC21cI9dBTbubiesGewNJ7EOLXTNpg&usqp=CAU',
+                  price: '25000 IQD',
+                  storeName: 'Fruites store',
+                  storeImage:
+                      'https://static.vecteezy.com/system/resources/previews/003/275/730/original/shopping-bag-store-logo-online-shopping-logo-design-free-vector.jpg',
+                ),
+              ],
+            ),
           ),
         ],
       ),
