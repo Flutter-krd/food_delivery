@@ -8,18 +8,21 @@ class ProductDetailsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
           const ProductDetailsAppBar(),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(12),
-              child: Image.network(
-                'https://www.hauteandhealthyliving.com/wp-content/uploads/2022/06/worcestershire-sauce-burger-recipe-bread-crumbs-11.jpg',
-                width: double.infinity,
-                height: MediaQuery.of(context).size.height * 0.58,
-                fit: BoxFit.cover,
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(12),
+                child: Image.network(
+                  'https://www.hauteandhealthyliving.com/wp-content/uploads/2022/06/worcestershire-sauce-burger-recipe-bread-crumbs-11.jpg',
+                  // width: double.infinity,
+                  // height: MediaQuery.of(context).size.height * 0.58,
+                  fit: BoxFit.cover,
+                ),
               ),
             ),
           ),
@@ -62,8 +65,6 @@ class ProductDetailsScreen extends StatelessWidget {
                   ],
                 ),
                 Container(
-                  // width: 200,
-                  // height: 60,
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(40),
@@ -81,15 +82,16 @@ class ProductDetailsScreen extends StatelessWidget {
                         height: 20,
                         width: 1,
                         color: Colors.black38,
-                                                margin: EdgeInsets.only(right: 20),
-
+                        margin: const EdgeInsets.only(right: 20),
                       ),
-                      const Text('1', style: TextStyle(fontSize: 18, color: Colors.redAccent)),
-                       Container(
+                      const Text('1',
+                          style:
+                              TextStyle(fontSize: 18, color: Colors.redAccent)),
+                      Container(
                         height: 20,
                         width: 1,
                         color: Colors.black38,
-                        margin: EdgeInsets.only(left: 20),
+                        margin: const EdgeInsets.only(left: 20),
                       ),
                       IconButton(
                         onPressed: () {
@@ -101,6 +103,76 @@ class ProductDetailsScreen extends StatelessWidget {
                   ),
                 ),
               ],
+            ),
+          ),
+          const SizedBox(
+            height: 20,
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 2),
+            child: TextField(
+              decoration: InputDecoration(
+                hintText: 'Leave a note',
+                prefixIcon: const Icon(Icons.edit_document),
+                prefixIconColor: Colors.black26,
+                hintStyle: const TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w600,
+                  color: Colors.black38,
+                ),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(16),
+                  borderSide: const BorderSide(color: Colors.black26),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(16),
+                  borderSide: const BorderSide(color: Colors.black26),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(16),
+                  borderSide: const BorderSide(color: Colors.black26),
+                ),
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+            child: SizedBox(
+              height: MediaQuery.of(context).size.height * 0.08,
+              child: TextButton(
+                onPressed: () {
+                  print('clciked');
+                },
+                child: const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Order Item',
+                        style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500,
+                            color: Colors.white),
+                      ),
+                      Text(
+                        'Total: 15000 IQD',
+                        style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white),
+                      )
+                    ],
+                  ),
+                ),
+                style: TextButton.styleFrom(
+                  primary: Colors.white,
+                  backgroundColor: Colors.black,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(40),
+                  ),
+                ),
+              ),
             ),
           ),
         ],
