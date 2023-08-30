@@ -13,14 +13,19 @@ class ProductDetailsAppBar extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Container(
-            height: 50,
-            width: 50,
-            decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(40),
-                border: Border.all(color: Colors.black26)),
-            child: const Icon(Icons.arrow_back),
+          GestureDetector(
+            onTap: () {
+              Navigator.of(context).pop();
+            },
+            child: Container(
+              height: 50,
+              width: 50,
+              decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(40),
+                  border: Border.all(color: Colors.black26)),
+              child: const Icon(Icons.arrow_back),
+            ),
           ),
           const SizedBox(
             width: 8,

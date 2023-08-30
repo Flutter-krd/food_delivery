@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:food_delivery/components/product_details_app_bar.dart';
+import 'package:food_delivery/screens/order_screen.dart';
 
 class ProductDetailsScreen extends StatelessWidget {
   const ProductDetailsScreen({super.key});
@@ -141,8 +142,19 @@ class ProductDetailsScreen extends StatelessWidget {
               height: MediaQuery.of(context).size.height * 0.08,
               child: TextButton(
                 onPressed: () {
-                  print('clciked');
+                  // navigate to order screen
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => const OrderScreen(),
+                    ),
+                  );
                 },
+                style: TextButton.styleFrom(
+                  foregroundColor: Colors.white, backgroundColor: Colors.black,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(40),
+                  ),
+                ),
                 child: const Padding(
                   padding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
                   child: Row(
@@ -163,13 +175,6 @@ class ProductDetailsScreen extends StatelessWidget {
                             color: Colors.white),
                       )
                     ],
-                  ),
-                ),
-                style: TextButton.styleFrom(
-                  primary: Colors.white,
-                  backgroundColor: Colors.black,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(40),
                   ),
                 ),
               ),

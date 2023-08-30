@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:food_delivery/screens/home_screen.dart';
+import 'package:food_delivery/screens/login_screen.dart';
+import 'package:food_delivery/screens/register_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -17,7 +19,7 @@ class _SplashScreenState extends State<SplashScreen> {
       () {
        Navigator.of(context).push(
           MaterialPageRoute(
-            builder: (context) => const HomeScreen(),
+            builder: (context) => const LoginScreen(),
           ),
        );
       },
